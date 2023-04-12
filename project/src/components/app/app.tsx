@@ -7,9 +7,15 @@ import Contacts from '../../pages/contacts/contacts';
 import Login from '../../pages/login/login';
 import MyQuests from '../../pages/my-quests/my-quests';
 import Quest from '../../pages/quest/quest';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { getQuests } from '../../store/site-data/selectors';
 
 
 function App(): JSX.Element {
+
+  // eslint-disable-next-line no-console
+  console.log(useAppSelector(getQuests));
+
   return (
     <BrowserRouter>
       <Routes>
