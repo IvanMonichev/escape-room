@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 
 function Header(): JSX.Element {
   return (
@@ -11,19 +12,19 @@ function Header(): JSX.Element {
         <nav className="main-nav header__main-nav">
           <ul className="main-nav__list">
             <li className="main-nav__item">
-              <a className="link active" href="index.html">
+              <Link className="link active" to="/">
                 Квесты
-              </a>
+              </Link>
             </li>
             <li className="main-nav__item">
-              <a className="link" href="contacts.html">
+              <Link className="link" to="contacts">
                 Контакты
-              </a>
+              </Link>
             </li>
             <li className="main-nav__item">
-              <a className="link" href="my-quests.html">
+              <Link className="link" to="my-quests">
                 Мои бронирования
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
