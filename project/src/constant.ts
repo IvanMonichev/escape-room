@@ -53,3 +53,9 @@ export const typesQuests: TypesQuest[] = [
 export enum ApiRoute {
   Quests = '/quest'
 }
+
+export const localizedLevels = {
+  easy: 'лёгкий',
+  medium: 'средний',
+  hard: 'сложный'
+};

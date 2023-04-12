@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { getIsQuestsLoading, getQuests, selectQuests } from '../../store/site-data/selectors';
+import { getIsQuestsLoading, selectQuests } from '../../store/site-data/selectors';
 import Spinner from '../spinner/spinner';
 import Card from '../card/card';
 

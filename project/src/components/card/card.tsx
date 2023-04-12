@@ -1,5 +1,6 @@
 import { Quest } from '../../types/types';
 import { Link } from 'react-router-dom';
+import { localizedLevels } from '../../constant';
 
 type CardProps = Quest;
 
@@ -39,7 +40,7 @@ function Card({ id, title, type, peopleMinMax, previewImgWebp, previewImg, level
             <svg width={14} height={14} aria-hidden="true">
               <use xlinkHref="#icon-level" />
             </svg>
-            {level}
+            {localizedLevels[level]}
           </li>
         </ul>
       </div>

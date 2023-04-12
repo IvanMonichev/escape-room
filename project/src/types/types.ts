@@ -17,5 +17,3 @@ export type Quest = {
   type: TypeApiName;
   peopleMinMax: number[];
 }
-
-
