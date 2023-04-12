@@ -1,3 +1,13 @@
+import { TypesQuest } from './types/types';
+
+export const types = [
+  'all-quests',
+  'adventure',
+  'horror',
+  'mystic',
+  'detective',
+  'sci-fi'
+] as const;
 
 export enum AppRoute {
   Root = '/',
@@ -10,16 +20,35 @@ export enum AppRoute {
 
 export enum StoreSlice {
   SiteData = 'SITE_DATA',
-
+  SiteProcess = 'SITE_PROCESS',
 }
 
-export const typesQuests = [
-  'horror',
-  'mystic',
-  'detective',
-  'adventures',
-  'sci-fi'
-] as const;
+export const typesQuests: TypesQuest[] = [
+  {
+    name: 'all-quests',
+    title: 'Все квесты'
+  },
+  {
+    name: 'adventure',
+    title: 'Приключения'
+  },
+  {
+    name: 'horror',
+    title: 'Ужасы'
+  },
+  {
+    name: 'mystic',
+    title: 'Мистика'
+  },
+  {
+    name: 'detective',
+    title: 'Детектив'
+  },
+  {
+    name: 'sci-fi',
+    title: 'Sci-Fi'
+  },
+];
 
 export enum ApiRoute {
   Quests = '/quest'
