@@ -1,5 +1,5 @@
 import CardList from '../../components/card-list/card-list';
-import CitiesList from '../../components/cities-list/cities-list';
+import TypesList from '../../components/types-list/types-list';
 
 function Main(): JSX.Element {
   return (
@@ -17,7 +17,7 @@ function Main(): JSX.Element {
           <form className="filter" action="#" method="get">
             <fieldset className="filter__section">
               <legend className="visually-hidden">Тематика</legend>
-              <CitiesList />
+              <TypesList />
             </fieldset>
             <fieldset className="filter__section">
               <legend className="visually-hidden">Сложность</legend>

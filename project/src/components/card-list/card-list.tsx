@@ -1,11 +1,11 @@
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { getIsQuestsLoading, getQuests } from '../../store/site-data/selectors';
+import { getIsQuestsLoading, getQuests, selectQuests } from '../../store/site-data/selectors';
 import Spinner from '../spinner/spinner';
 import Card from '../card/card';
 
 
 function CardList(): JSX.Element {
-  const quests = useAppSelector(getQuests);
+  const quests = useAppSelector(selectQuests);
   const isQuestsLoading = useAppSelector(getIsQuestsLoading);
 
 

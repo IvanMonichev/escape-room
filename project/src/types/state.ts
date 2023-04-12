@@ -1,9 +1,13 @@
-import { Quest } from './types';
+import { Quest, TypeName } from './types';
 import store from '../store';
 
 export type SiteData = {
   quests: Quest[];
   isQuestsLoading: boolean;
+}
+
+export type SiteProcess = {
+  type: TypeName;
 }
 
 export type State = ReturnType<typeof store.getState>;
