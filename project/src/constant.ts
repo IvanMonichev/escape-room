@@ -54,6 +54,13 @@ export enum ApiRoute {
   Quests = '/quest'
 }
 
+export enum Level {
+  Any = 'Любой',
+  Easy = 'Лёгкий',
+  Medium = 'Средний',
+  Hard = 'Сложный'
+}
+
 export const localizedLevels = {
   easy: 'лёгкий',
   medium: 'средний',

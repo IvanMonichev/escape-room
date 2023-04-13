@@ -1,12 +1,14 @@
-import { types } from '../constant';
+import { Level, types } from '../constant';
 
 export type TypeName = typeof types[number];
 export type TypeApiName = Exclude<TypeName, 'all-quests'>
+export type LevelName = keyof typeof Level;
 
 export type TypesQuest = {
   name: TypeName;
   title: string;
 }
+
 
 export type Quest = {
   id: string;

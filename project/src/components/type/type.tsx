@@ -20,7 +20,7 @@ function Type({ name, title, index, isActive, onClick }: TypeProps): JSX.Element
       tabIndex={index}
       onClick={handleTypeClick}
     >
-      <input type="radio" name="type" id={name}/>
+      <input type="radio" name="type" id={name} defaultChecked={isActive}/>
       <label className="filter__label" htmlFor={name}>
         <svg
           className="filter__icon"
