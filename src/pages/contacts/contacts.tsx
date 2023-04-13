@@ -1,3 +1,4 @@
+import MapContacts from '../../components/map-contacts/map-contacts';
 
 
 function Contacts(): JSX.Element {
@@ -49,7 +50,7 @@ function Contacts(): JSX.Element {
           </dl>
           <div className="contacts__map">
             <div className="map">
-              <div className="map__container"></div>
+              <MapContacts />
             </div>
           </div>
         </div>

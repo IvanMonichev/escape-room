@@ -19,3 +19,10 @@ export type Quest = {
   type: TypeApiName;
   peopleMinMax: number[];
 }
+
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+};
+

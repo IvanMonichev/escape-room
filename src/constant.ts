@@ -1,5 +1,8 @@
 import { TypesQuest } from './types/types';
 
+export const URL_MARKER_DEFAULT = 'img/svg/pin-default.svg';
+export const URL_MARKER_CURRENT = 'img/pin-active.svg';
+
 export const types = [
   'all-quests',
   'adventure',

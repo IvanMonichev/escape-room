@@ -6,7 +6,7 @@ import { LevelName, TypeName } from '../../types/types';
 
 const initialState: SiteProcess = {
   type: types[0],
-  level: "Any",
+  level: 'Any',
 };
 
 export const siteProcess = createSlice({
