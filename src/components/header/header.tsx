@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
 
 function Header(): JSX.Element {
+  const isActiveLink = ({ isActive }: { isActive: boolean }) => (isActive ? 'link active' : 'link');
+
   return (
     <header className="header">
       <div className="container container--size-l">
@@ -12,19 +15,19 @@ function Header(): JSX.Element {
         <nav className="main-nav header__main-nav">
           <ul className="main-nav__list">
             <li className="main-nav__item">
-              <Link className="link active" to="/">
+              <NavLink className={isActiveLink} to="/" end>
                 Квесты
-              </Link>
+              </NavLink>
             </li>
             <li className="main-nav__item">
-              <Link className="link" to="contacts">
+              <NavLink className={isActiveLink} to="/contacts">
                 Контакты
-              </Link>
+              </NavLink>
             </li>
             <li className="main-nav__item">
-              <Link className="link" to="my-quests">
+              <NavLink className={isActiveLink} to="/my-quests">
                 Мои бронирования
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </nav>
