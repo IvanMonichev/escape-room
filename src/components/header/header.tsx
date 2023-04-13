@@ -29,7 +29,7 @@ function Header(): JSX.Element {
           </ul>
         </nav>
         <div className="header__side-nav">
-          <a className="btn btn--accent header__side-item" href="#">
+          <a className="btn btn--accent header__side-item" href="src/components/header#">
             Выйти
           </a>
           <a

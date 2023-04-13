@@ -236,7 +236,7 @@ function Booking(): JSX.Element {
             </span>
             <span className="custom-checkbox__label">
               Я&nbsp;согласен с
-              <a className="link link--active-silver link--underlined" href="#">
+              <a className="link link--active-silver link--underlined" href="booking#">
             правилами обработки персональных данных
               </a>
               &nbsp;и пользовательским соглашением

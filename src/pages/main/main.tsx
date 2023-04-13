@@ -15,7 +15,7 @@ function Main(): JSX.Element {
           </h2>
         </div>
         <div className="page-content__item">
-          <form className="filter" action="#" method="get">
+          <form className="filter" action="main#" method="get">
             <fieldset className="filter__section">
               <legend className="visually-hidden">Тематика</legend>
               <TypesList />

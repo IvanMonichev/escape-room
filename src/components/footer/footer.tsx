@@ -8,7 +8,7 @@ function Footer(): JSX.Element {
             <li className="socials__item">
               <a
                 className="socials__link"
-                href="#"
+                href="src/components/footer#"
                 aria-label="Skype"
                 target="_blank"
                 rel="nofollow noopener noreferrer"
@@ -34,7 +34,7 @@ function Footer(): JSX.Element {
             <li className="socials__item">
               <a
                 className="socials__link"
-                href="#"
+                href="src/components/footer#"
                 aria-label="ВКонтакте"
                 target="_blank"
                 rel="nofollow noopener noreferrer"
