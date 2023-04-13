@@ -1,6 +1,6 @@
 import { Icon, Marker } from 'leaflet';
 import { useEffect, useRef } from 'react';
-import { URL_MARKER_DEFAULT } from '../../constant';
+import { URL_MARKER_DEFAULT } from '../../utils/constant';
 import useMap from '../../hooks/useMap';
 import { Location } from '../../types/types';
 import 'leaflet/dist/leaflet.css';

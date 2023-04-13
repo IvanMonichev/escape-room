@@ -1,4 +1,4 @@
-import { Level } from '../../constant';
+import { Level } from '../../utils/constant';
 import { LevelName } from '../../types/types';
 import LevelItem from '../level/level-item';
 import { useAppDispatch } from '../../hooks/useAppDispatch';

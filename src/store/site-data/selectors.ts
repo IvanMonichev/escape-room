@@ -1,11 +1,13 @@
-import { StoreSlice } from '../../constant';
+import { StoreSlice } from '../../utils/constant';
 import { State } from '../../types/state';
-import { Quest } from '../../types/types';
+import { QuestCard, QuestView } from '../../types/types';
 import { createSelector } from '@reduxjs/toolkit';
 import { getLevel, getType } from '../site-process/selectors';
 
 export const getIsQuestsLoading = ( { [StoreSlice.SiteData]: SITE_DATA }: State): boolean => SITE_DATA.isQuestsLoading;
-export const getQuests = ({ [StoreSlice.SiteData]: SITE_DATA }: State): Quest[] => SITE_DATA.quests;
+export const getQuests = ({ [StoreSlice.SiteData]: SITE_DATA }: State): QuestCard[] => SITE_DATA.quests;
+export const getQuest = ({ [StoreSlice.SiteData]: SITE_DATA }: State): QuestView | null => SITE_DATA.quest;
+export const getIsQuestLoading = ( { [StoreSlice.SiteData]: SITE_DATA }: State): boolean => SITE_DATA.isQuestLoading;
 
 
 export const selectQuests = createSelector(

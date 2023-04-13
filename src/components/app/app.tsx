@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../constant';
+import { AppRoute } from '../../utils/constant';
 import Main from '../../pages/main/main';
 import Layout from '../layout/layout';
 import Booking from '../../pages/booking/booking';
@@ -19,7 +19,7 @@ function App(): JSX.Element {
           <Route path={AppRoute.Contacts} element={<Contacts />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.MyQuests} element={<MyQuests />} />
-          <Route path={AppRoute.Quest} element={<Quest />} />
+          <Route path={`${AppRoute.Quest}/:id`} element={<Quest />} />
         </Route>
 
       </Routes>

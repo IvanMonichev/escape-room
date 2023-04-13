@@ -1,4 +1,4 @@
-import { typesQuests } from '../../constant';
+import { typesQuests } from '../../utils/constant';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getType } from '../../store/site-process/selectors';
 import { TypeName } from '../../types/types';

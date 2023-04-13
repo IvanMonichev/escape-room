@@ -1,4 +1,4 @@
-import { StoreSlice } from '../../constant';
+import { StoreSlice } from '../../utils/constant';
 import { LevelName, TypeName } from '../../types/types';
 import { State } from '../../types/state';
 

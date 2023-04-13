@@ -1,5 +1,5 @@
 import { SiteProcess } from '../../types/state';
-import { StoreSlice, types } from '../../constant';
+import { StoreSlice, types } from '../../utils/constant';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LevelName, TypeName } from '../../types/types';
 

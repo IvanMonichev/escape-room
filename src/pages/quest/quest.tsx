@@ -1,29 +1,62 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Spinner from '../../components/spinner/spinner';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { fetchQuest } from '../../store/action';
+import { getIsQuestLoading, getQuest } from '../../store/site-data/selectors';
+import { localizedLevels, localizedTypes } from '../../utils/constant';
 
-function Quest(): JSX.Element {
+function Quest(): JSX.Element | null {
+  const params = useParams();
+  const dispatch = useAppDispatch();
+  const isQuestLoading = useAppSelector(getIsQuestLoading);
+  const quest = useAppSelector(getQuest);
+
+  useEffect(() => {
+    const { id } = params;
+    if (id) {
+      dispatch(fetchQuest(id));
+    }
+  }, [params, dispatch]);
+
+  if (isQuestLoading) {
+    return <Spinner />;
+  }
+
+  if (!quest) {
+    return null;
+  }
+
+  // eslint-disable-next-line no-console
+  console.log(quest);
+
+  const { title, type, coverImg, coverImgWebp, level, description } = quest;
+
+
   return (
     <main className="decorated-page quest-page">
       <div className="decorated-page__decor" aria-hidden="true">
         <picture>
           <source
             type="image/webp"
-            srcSet="img/content/maniac/maniac-size-m.webp, img/content/maniac/maniac-size-m@2x.webp 2x"
+            srcSet={coverImgWebp}
           />
           <img
-            src="img/content/maniac/maniac-size-m.jpg"
-            srcSet="img/content/maniac/maniac-size-m@2x.jpg 2x"
+            src={coverImg}
             width={1366}
             height={768}
-            alt=""
+            alt={title}
           />
         </picture>
       </div>
       <div className="container container--size-l">
         <div className="quest-page__content">
           <h1 className="title title--size-l title--uppercase quest-page__title">
-            Маньяк
+            {title}
           </h1>
           <p className="subtitle quest-page__subtitle">
-            <span className="visually-hidden">Жанр:</span>Ужасы
+            <span className="visually-hidden">Жанр:</span>{localizedTypes[type]}
           </p>
           <ul className="tags tags--size-l quest-page__tags">
             <li className="tags__item">
@@ -36,17 +69,11 @@ function Quest(): JSX.Element {
               <svg width={14} height={14} aria-hidden="true">
                 <use xlinkHref="#icon-level" />
               </svg>
-              Средний
+              {localizedLevels[level]}
             </li>
           </ul>
           <p className="quest-page__description">
-            В&nbsp;комнате с&nbsp;приглушённым светом несколько человек, незнакомых
-            друг с&nbsp;другом, приходят в&nbsp;себя. Никто не&nbsp;помнит, что
-            произошло прошлым вечером. Руки и&nbsp;ноги связаны, но&nbsp;одному
-            из&nbsp;вас получилось освободиться. На&nbsp;стене висит пугающий таймер
-            и&nbsp;запущен отсчёт 60&nbsp;минут. Сможете&nbsp;ли вы&nbsp;разобраться
-            в&nbsp;стрессовой ситуации, помочь другим, разобраться что произошло
-            и&nbsp;выбраться из&nbsp;комнаты?
+            {description}
           </p>
           <a
             className="btn btn--accent btn--cta quest-page__btn"

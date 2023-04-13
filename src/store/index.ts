@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './root-reducer';
 import { createApi } from '../services/api';
 import { fetchQuests } from './action';
+import history from '../utils/history';
 
 const api = createApi();
 
@@ -10,7 +11,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     thunk: {
       extraArgument: {
-        api
+        api,
+        history
       }
     }
   })

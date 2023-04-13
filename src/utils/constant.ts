@@ -1,4 +1,4 @@
-import { TypesQuest } from './types/types';
+import { TypesQuest } from '../types/types';
 
 export const URL_MARKER_DEFAULT = 'img/svg/pin-default.svg';
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
@@ -18,7 +18,8 @@ export enum AppRoute {
   Contacts = '/contacts',
   Login = '/login',
   MyQuests = '/my-quests',
-  Quest = '/quest'
+  Quest = '/quest',
+  NotFound = '/404'
 }
 
 export enum StoreSlice {
@@ -69,3 +70,24 @@ export const localizedLevels = {
   medium: 'средний',
   hard: 'сложный'
 };
+
+export enum Type {
+  Adventure = 'adventure',
+  Horror = 'horror',
+  Mystic = 'mystic',
+  Detective = 'detective',
+  SciFi = 'sci-fi'
+}
+
+export const localizedTypes = {
+  [Type.Adventure]: 'Приключения',
+  [Type.Horror]: 'Ужасы',
+  [Type.Mystic]: 'Мистика',
+  [Type.Detective]:'Детектив',
+  [Type.SciFi]: 'Sci-Fi'
+};
+
+export enum HttpCode {
+  NotFound = 404,
+  NoAuth = 401,
+}
