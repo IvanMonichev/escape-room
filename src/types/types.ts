@@ -40,4 +40,5 @@ export type UserAuth = Pick<User, 'email'> & { password: string };
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  token: User['token'];
 };

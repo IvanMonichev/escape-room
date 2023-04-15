@@ -6,21 +6,13 @@ export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 export const VALID_EMAIL_REGEXP =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export const VALID_PASSWORD_REGEXP = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
-export const INVALID_PASSWORD_TOOLTIP = 'Пароль должен состоять хотя бы из одной буквы и цифры';
 
 export const enum InvalidMessage {
-  Email = 'Электронная почта должа быть корректного формата',
+  Email = 'Электронная почта должна быть корректного формата',
   Password = 'Пароль должен состоять хотя бы из одной буквы и цифры',
 }
 
-export const types = [
-  'all-quests',
-  'adventure',
-  'horror',
-  'mystic',
-  'detective',
-  'sci-fi',
-] as const;
+export const types = ['all-quests', 'adventures', 'horror', 'mystic', 'detective', 'sci-fi'] as const;
 
 export enum AppRoute {
   Root = '/',
@@ -44,7 +36,7 @@ export const typesQuests: TypesQuest[] = [
     title: 'Все квесты',
   },
   {
-    name: 'adventure',
+    name: 'adventures',
     title: 'Приключения',
   },
   {
@@ -68,6 +60,7 @@ export const typesQuests: TypesQuest[] = [
 export enum ApiRoute {
   Quests = '/quest',
   Login = '/login',
+  Logout = '/logout',
 }
 
 export enum Level {
@@ -84,7 +77,7 @@ export const localizedLevels = {
 };
 
 export enum Type {
-  Adventure = 'adventure',
+  Adventures = 'adventures',
   Horror = 'horror',
   Mystic = 'mystic',
   Detective = 'detective',
@@ -92,7 +85,7 @@ export enum Type {
 }
 
 export const localizedTypes = {
-  [Type.Adventure]: 'Приключения',
+  [Type.Adventures]: 'Приключения',
   [Type.Horror]: 'Ужасы',
   [Type.Mystic]: 'Мистика',
   [Type.Detective]: 'Детектив',

@@ -15,6 +15,7 @@ export const Action = {
   FETCH_QUESTS: 'quests/fetch',
   FETCH_QUEST: 'quest/fetch',
   LOGIN_USER: 'user/login',
+  LOGOUT_USER: 'user/logout',
   FETCH_USER_STATUS: 'user/fetch-status',
 };
 
@@ -77,5 +78,15 @@ export const fetchUserStatus = createAsyncThunk<User['token'], undefined, { extr
 
       return Promise.reject(err);
     }
+  }
+);
+
+export const logoutUser = createAsyncThunk<void, undefined, { extra: Extra }>(
+  Action.LOGOUT_USER,
+  async (_, { extra }) => {
+    const { api } = extra;
+    await api.delete(ApiRoute.Logout);
+
+    Token.drop();
   }
 );

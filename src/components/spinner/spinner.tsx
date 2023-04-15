@@ -1,9 +1,9 @@
-
+import styles from './spinner.module.css';
 
 function Spinner(): JSX.Element {
   return (
-    <div>
-      <p>Загрузка...</p>
+    <div className={styles.container}>
+      <div className={styles.preloader}></div>
     </div>
   );
 }
