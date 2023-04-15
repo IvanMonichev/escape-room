@@ -1,14 +1,13 @@
-import { Level, types } from '../utils/constant';
+import { AuthorizationStatus, Level, types } from '../utils/constant';
 
-export type TypeName = typeof types[number];
-export type TypeApiName = Exclude<TypeName, 'all-quests'>
+export type TypeName = (typeof types)[number];
+export type TypeApiName = Exclude<TypeName, 'all-quests'>;
 export type LevelName = keyof typeof Level;
 
 export type TypesQuest = {
   name: TypeName;
   title: string;
-}
-
+};
 
 export type QuestCard = {
   id: string;
@@ -18,13 +17,13 @@ export type QuestCard = {
   level: 'easy' | 'medium' | 'hard';
   type: TypeApiName;
   peopleMinMax: number[];
-}
+};
 
 export type QuestView = QuestCard & {
   description: string;
   coverImg: string;
   coverImgWebp: string;
-}
+};
 
 export type Location = {
   latitude: number;
@@ -32,3 +31,13 @@ export type Location = {
   zoom: number;
 };
 
+export type User = {
+  email: string;
+  token: string;
+};
+
+export type UserAuth = Pick<User, 'email'> & { password: string };
+
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatus;
+};

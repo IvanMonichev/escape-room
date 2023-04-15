@@ -1,17 +1,19 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../utils/constant';
-import Main from '../../pages/main/main';
-import Layout from '../layout/layout';
+import React from 'react';
+import { unstable_HistoryRouter as HistoryRouter, Route, Routes } from 'react-router-dom';
+
 import Booking from '../../pages/booking/booking';
 import Contacts from '../../pages/contacts/contacts';
 import Login from '../../pages/login/login';
+import Main from '../../pages/main/main';
 import MyQuests from '../../pages/my-quests/my-quests';
 import Quest from '../../pages/quest/quest';
-
+import { AppRoute } from '../../utils/constant';
+import history from '../../utils/history';
+import Layout from '../layout/layout';
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
+    <HistoryRouter history={history}>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Main />} />
@@ -21,10 +23,8 @@ function App(): JSX.Element {
           <Route path={AppRoute.MyQuests} element={<MyQuests />} />
           <Route path={`${AppRoute.Quest}/:id`} element={<Quest />} />
         </Route>
-
       </Routes>
-
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

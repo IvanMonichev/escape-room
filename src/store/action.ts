@@ -1,17 +1,20 @@
-import type { History } from 'history';
-import { AxiosError, AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { QuestCard, QuestView } from '../types/types';
+import { AxiosError, AxiosInstance } from 'axios';
+import type { History } from 'history';
+
+import Token from '../services/Token';
+import { QuestCard, QuestView, User, UserAuth } from '../types/types';
 import { ApiRoute, AppRoute, HttpCode } from '../utils/constant';
 
 type Extra = {
   api: AxiosInstance;
   history: History;
-}
+};
 
 export const Action = {
   FETCH_QUESTS: 'quests/fetch',
   FETCH_QUEST: 'quest/fetch',
+  LOGIN_USER: 'user/login',
 };
 
 export const fetchQuests = createAsyncThunk<QuestCard[], undefined, { extra: Extra }>(
@@ -41,5 +44,17 @@ export const fetchQuest = createAsyncThunk<QuestView, QuestView['id'], { extra: 
 
       return Promise.reject(err);
     }
+  }
+);
+
+export const loginUser = createAsyncThunk<void, UserAuth, { extra: Extra }>(
+  Action.LOGIN_USER,
+  async ({ email, password }, { extra }) => {
+    const { api, history } = extra;
+    const { data } = await api.post<User>(ApiRoute.Login, { email, password });
+    const { token } = data;
+
+    Token.save(token);
+    history.push(AppRoute.Root);
   }
 );
