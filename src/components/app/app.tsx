@@ -6,6 +6,7 @@ import Contacts from '../../pages/contacts/contacts';
 import Login from '../../pages/login/login';
 import Main from '../../pages/main/main';
 import MyQuests from '../../pages/my-quests/my-quests';
+import NotFound from '../../pages/not-found/not-found';
 import Quest from '../../pages/quest/quest';
 import { AppRoute, AuthorizationStatus } from '../../utils/constant';
 import history from '../../utils/history';
@@ -44,6 +45,7 @@ function App(): JSX.Element {
             }
           />
           <Route path={`${AppRoute.Quest}/:id`} element={<Quest />} />
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </HistoryRouter>
