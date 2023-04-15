@@ -20,7 +20,7 @@ function App(): JSX.Element {
         <Route element={<Layout />}>
           <Route index element={<Main />} />
           <Route
-            path={AppRoute.Booking}
+            path={`${AppRoute.Quest}/:id${AppRoute.Booking}`}
             element={
               <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectTo={AppRoute.Login}>
                 <Booking />

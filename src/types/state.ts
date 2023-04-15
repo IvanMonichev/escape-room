@@ -1,11 +1,13 @@
-import { LevelName, QuestCard, QuestView, TypeName } from './types';
 import store from '../store';
+import { LevelName, Offer, QuestCard, QuestView, TypeName } from './types';
 
 export type SiteData = {
   quests: QuestCard[];
   isQuestsLoading: boolean;
-  quest: QuestView | null;
   isQuestLoading: boolean;
+  quest: QuestView | null;
+  isOffersLoading: boolean;
+  offers: Offer[] | null;
 };
 
 export type SiteProcess = {

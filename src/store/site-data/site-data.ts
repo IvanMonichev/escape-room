@@ -1,14 +1,16 @@
-import { SiteData } from '../../types/state';
 import { createSlice } from '@reduxjs/toolkit';
-import { StoreSlice } from '../../utils/constant';
-import { fetchQuest, fetchQuests } from '../action';
 
+import { SiteData } from '../../types/state';
+import { StoreSlice } from '../../utils/constant';
+import { fetchOffers, fetchQuest, fetchQuests } from '../action';
 
 const initialState: SiteData = {
   quests: [],
   isQuestsLoading: false,
-  quest: null,
   isQuestLoading: false,
+  quest: null,
+  isOffersLoading: false,
+  offers: null,
 };
 
 export const siteData = createSlice({
@@ -36,6 +38,16 @@ export const siteData = createSlice({
       })
       .addCase(fetchQuest.rejected, (state) => {
         state.isQuestLoading = false;
+      })
+      .addCase(fetchOffers.pending, (state) => {
+        state.isOffersLoading = true;
+      })
+      .addCase(fetchOffers.fulfilled, (state, action) => {
+        state.offers = action.payload;
+        state.isOffersLoading = false;
+      })
+      .addCase(fetchOffers.rejected, (state) => {
+        state.isOffersLoading = false;
       });
-  }
+  },
 });

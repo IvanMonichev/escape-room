@@ -17,7 +17,6 @@ function PrivateRoute({ children, restrictedFor, redirectTo }: PrivateRouteProps
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return <Spinner />;
   }
-
   return authorizationStatus !== restrictedFor ? children : <Navigate to={redirectTo} />;
 }
 

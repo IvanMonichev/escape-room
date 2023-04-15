@@ -8,3 +8,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.buttonsContainer {
+  display: flex;
+  column-gap: 10px;
+}

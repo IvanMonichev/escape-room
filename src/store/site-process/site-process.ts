@@ -1,8 +1,8 @@
-import { SiteProcess } from '../../types/state';
-import { StoreSlice, types } from '../../utils/constant';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LevelName, TypeName } from '../../types/types';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import { SiteProcess } from '../../types/state';
+import { LevelName, TypeName } from '../../types/types';
+import { StoreSlice, types } from '../../utils/constant';
 
 const initialState: SiteProcess = {
   type: types[0],
@@ -18,8 +18,8 @@ export const siteProcess = createSlice({
     },
     setLevel: (state, action: PayloadAction<LevelName>) => {
       state.level = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { setType, setLevel } = siteProcess.actions;

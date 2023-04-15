@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+
 import Spinner from '../../components/spinner/spinner';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchQuest } from '../../store/action';
 import { getIsQuestLoading, getQuest } from '../../store/site-data/selectors';
-import { localizedLevels, localizedTypes } from '../../utils/constant';
+import { setBookingUrl } from '../../store/user-process/user-process';
+import { AppRoute, localizedLevels, localizedTypes } from '../../utils/constant';
 
 function Quest(): JSX.Element | null {
   const params = useParams();
@@ -28,59 +30,49 @@ function Quest(): JSX.Element | null {
     return null;
   }
 
-  // eslint-disable-next-line no-console
-  console.log(quest);
+  const { id, title, type, coverImg, coverImgWebp, level, description } = quest;
 
-  const { title, type, coverImg, coverImgWebp, level, description } = quest;
-
+  const handleSetUrlClick = () => {
+    dispatch(setBookingUrl(`${AppRoute.Quest}/${id}${AppRoute.Booking}`));
+  };
 
   return (
-    <main className="decorated-page quest-page">
-      <div className="decorated-page__decor" aria-hidden="true">
+    <main className='decorated-page quest-page'>
+      <div className='decorated-page__decor' aria-hidden='true'>
         <picture>
-          <source
-            type="image/webp"
-            srcSet={coverImgWebp}
-          />
-          <img
-            src={coverImg}
-            width={1366}
-            height={768}
-            alt={title}
-          />
+          <source type='image/webp' srcSet={coverImgWebp} />
+          <img src={coverImg} width={1366} height={768} alt={title} />
         </picture>
       </div>
-      <div className="container container--size-l">
-        <div className="quest-page__content">
-          <h1 className="title title--size-l title--uppercase quest-page__title">
-            {title}
-          </h1>
-          <p className="subtitle quest-page__subtitle">
-            <span className="visually-hidden">Жанр:</span>{localizedTypes[type]}
+      <div className='container container--size-l'>
+        <div className='quest-page__content'>
+          <h1 className='title title--size-l title--uppercase quest-page__title'>{title}</h1>
+          <p className='subtitle quest-page__subtitle'>
+            <span className='visually-hidden'>Жанр:</span>
+            {localizedTypes[type]}
           </p>
-          <ul className="tags tags--size-l quest-page__tags">
-            <li className="tags__item">
-              <svg width={11} height={14} aria-hidden="true">
-                <use xlinkHref="#icon-person" />
+          <ul className='tags tags--size-l quest-page__tags'>
+            <li className='tags__item'>
+              <svg width={11} height={14} aria-hidden='true'>
+                <use xlinkHref='#icon-person' />
               </svg>
               3–6&nbsp;чел
             </li>
-            <li className="tags__item">
-              <svg width={14} height={14} aria-hidden="true">
-                <use xlinkHref="#icon-level" />
+            <li className='tags__item'>
+              <svg width={14} height={14} aria-hidden='true'>
+                <use xlinkHref='#icon-level' />
               </svg>
               {localizedLevels[level]}
             </li>
           </ul>
-          <p className="quest-page__description">
-            {description}
-          </p>
-          <a
-            className="btn btn--accent btn--cta quest-page__btn"
-            href="booking.html"
+          <p className='quest-page__description'>{description}</p>
+          <Link
+            className='btn btn--accent btn--cta quest-page__btn'
+            to={`${AppRoute.Quest}/${id}${AppRoute.Booking}`}
+            onClick={handleSetUrlClick}
           >
             Забронировать
-          </a>
+          </Link>
         </div>
       </div>
     </main>

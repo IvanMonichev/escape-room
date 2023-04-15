@@ -3,7 +3,7 @@ import { AxiosError, AxiosInstance } from 'axios';
 import type { History } from 'history';
 
 import Token from '../services/Token';
-import { QuestCard, QuestView, User, UserAuth } from '../types/types';
+import { Offer, QuestCard, QuestView, User, UserAuth } from '../types/types';
 import { ApiRoute, AppRoute, HttpCode } from '../utils/constant';
 
 type Extra = {
@@ -14,6 +14,7 @@ type Extra = {
 export const Action = {
   FETCH_QUESTS: 'quests/fetch',
   FETCH_QUEST: 'quest/fetch',
+  FETCH_OFFERS: 'offers/fetch',
   LOGIN_USER: 'user/login',
   LOGOUT_USER: 'user/logout',
   FETCH_USER_STATUS: 'user/fetch-status',
@@ -40,6 +41,25 @@ export const fetchQuest = createAsyncThunk<QuestView, QuestView['id'], { extra: 
     } catch (err) {
       const axiosError = err as AxiosError;
 
+      if (axiosError.response?.status === HttpCode.NotFound) {
+        history.push(AppRoute.NotFound);
+      }
+
+      return Promise.reject(err);
+    }
+  }
+);
+
+export const fetchOffers = createAsyncThunk<Offer[], Offer['id'], { extra: Extra }>(
+  Action.FETCH_OFFERS,
+  async (id, { extra }) => {
+    const { api, history } = extra;
+
+    try {
+      const { data } = await api.get<Offer[]>(`${ApiRoute.Quests}/${id}${ApiRoute.Booking}`);
+      return data;
+    } catch (err) {
+      const axiosError = err as AxiosError;
       if (axiosError.response?.status === HttpCode.NotFound) {
         history.push(AppRoute.NotFound);
       }

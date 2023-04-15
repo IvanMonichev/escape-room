@@ -25,6 +25,27 @@ export type QuestView = QuestCard & {
   coverImgWebp: string;
 };
 
+export type Offer = {
+  id: string;
+  location: LocationQuest;
+  slots: Slots;
+};
+
+export type Slots = {
+  today: Time[];
+  tomorrow: Time[];
+};
+
+export type Time = {
+  time: string;
+  isAvailable: boolean;
+};
+
+export type LocationQuest = {
+  address: string;
+  coords: number[];
+};
+
 export type Location = {
   latitude: number;
   longitude: number;
@@ -41,4 +62,5 @@ export type UserAuth = Pick<User, 'email'> & { password: string };
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
   token: User['token'];
+  bookingUrl: string;
 };
