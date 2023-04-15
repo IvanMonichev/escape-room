@@ -15,6 +15,7 @@ export const Action = {
   FETCH_QUESTS: 'quests/fetch',
   FETCH_QUEST: 'quest/fetch',
   LOGIN_USER: 'user/login',
+  FETCH_USER_STATUS: 'user/fetch-status',
 };
 
 export const fetchQuests = createAsyncThunk<QuestCard[], undefined, { extra: Extra }>(
@@ -56,5 +57,25 @@ export const loginUser = createAsyncThunk<void, UserAuth, { extra: Extra }>(
 
     Token.save(token);
     history.push(AppRoute.Root);
+  }
+);
+
+export const fetchUserStatus = createAsyncThunk<User['token'], undefined, { extra: Extra }>(
+  Action.FETCH_USER_STATUS,
+  async (_, { extra }) => {
+    const { api } = extra;
+
+    try {
+      const { data } = await api.get<User>(ApiRoute.Login);
+      return data.token;
+    } catch (err) {
+      const axiosError = err as AxiosError;
+
+      if (axiosError.response?.status === HttpCode.NoAuth) {
+        Token.drop();
+      }
+
+      return Promise.reject(err);
+    }
   }
 );
