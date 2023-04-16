@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { SiteData } from '../../types/state';
+import { SiteData, SubmitStatus } from '../../types/state';
 import { StoreSlice } from '../../utils/constant';
-import { fetchOffers, fetchQuest, fetchQuests } from '../action';
+import { fetchOffers, fetchQuest, fetchQuests, postBooking } from '../action';
 
 const initialState: SiteData = {
   quests: [],
@@ -11,6 +11,7 @@ const initialState: SiteData = {
   quest: null,
   isOffersLoading: false,
   offers: null,
+  bookingStatus: SubmitStatus.Still,
 };
 
 export const siteData = createSlice({
@@ -48,6 +49,15 @@ export const siteData = createSlice({
       })
       .addCase(fetchOffers.rejected, (state) => {
         state.isOffersLoading = false;
+      })
+      .addCase(postBooking.pending, (state) => {
+        state.bookingStatus = SubmitStatus.Pending;
+      })
+      .addCase(postBooking.fulfilled, (state) => {
+        state.bookingStatus = SubmitStatus.Fullfilled;
+      })
+      .addCase(postBooking.rejected, (state) => {
+        state.bookingStatus = SubmitStatus.Rejected;
       });
   },
 });

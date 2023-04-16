@@ -6,10 +6,16 @@ export const URL_MARKER_ACTIVE = '/img/svg/pin-active.svg';
 export const VALID_EMAIL_REGEXP =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export const VALID_PASSWORD_REGEXP = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+export const VALID_PHONE_REGEXP = /^\+?7(9\d{9})$/;
+
+export const MIN_COUNT_NAME = 1;
+export const MAX_COUNT_NAME = 15;
 
 export const enum InvalidMessage {
   Email = 'Электронная почта должна быть корректного формата',
   Password = 'Пароль должен состоять хотя бы из одной буквы и цифры',
+  Name = 'Имя должно быть от 1 до 15 символов',
+  Phone = 'Телефон должен быть формата +7 (000) 000-00-00 (Ру-формат)',
 }
 
 export const types = ['all-quests', 'adventures', 'horror', 'mystic', 'detective', 'sci-fi'] as const;

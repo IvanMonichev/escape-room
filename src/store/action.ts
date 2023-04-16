@@ -3,7 +3,7 @@ import { AxiosError, AxiosInstance } from 'axios';
 import type { History } from 'history';
 
 import Token from '../services/Token';
-import { Offer, QuestCard, QuestView, User, UserAuth } from '../types/types';
+import { Booking, Offer, QuestCard, QuestView, User, UserAuth } from '../types/types';
 import { ApiRoute, AppRoute, HttpCode } from '../utils/constant';
 
 type Extra = {
@@ -18,6 +18,7 @@ export const Action = {
   LOGIN_USER: 'user/login',
   LOGOUT_USER: 'user/logout',
   FETCH_USER_STATUS: 'user/fetch-status',
+  POST_BOOKING: 'booking/post',
 };
 
 export const fetchQuests = createAsyncThunk<QuestCard[], undefined, { extra: Extra }>(
@@ -66,6 +67,22 @@ export const fetchOffers = createAsyncThunk<Offer[], Offer['id'], { extra: Extra
 
       return Promise.reject(err);
     }
+  }
+);
+
+export const postBooking = createAsyncThunk<void, Booking, { extra: Extra }>(
+  Action.POST_BOOKING,
+  async ({ questId, date, time, contactPerson, phone, withChildren, placeId, peopleCount }, { extra }) => {
+    const { api } = extra;
+    await api.post<undefined>(`${ApiRoute.Quests}/${questId}${ApiRoute.Booking}`, {
+      date,
+      time,
+      contactPerson,
+      phone,
+      withChildren,
+      placeId,
+      peopleCount,
+    });
   }
 );
 
