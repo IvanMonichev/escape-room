@@ -3,10 +3,12 @@ import { useEffect, useRef } from 'react';
 
 import useMap from '../../hooks/useMap';
 import { Location, Offer } from '../../types/types';
-import { URL_MARKER_DEFAULT } from '../../utils/constant';
+import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from '../../utils/constant';
 
 type MapBookingProps = {
   offers: Offer[];
+  activeOffer: Offer;
+  onClick: (offer: Offer) => void;
 };
 
 const locationCity: Location = {
@@ -21,18 +23,32 @@ const defaultCustomMarker = new Icon({
   iconAnchor: [20, 40],
 });
 
-function MapBooking({ offers }: MapBookingProps): JSX.Element {
+const currentCustomIcon = new Icon({
+  iconUrl: URL_MARKER_ACTIVE,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
+function MapBooking({ offers, activeOffer, onClick }: MapBookingProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, locationCity);
+
+  const { id, location } = activeOffer;
+
+  const handleSelectionClick = (offer: Offer) => {
+    onClick(offer);
+  };
 
   useEffect(() => {
     const markers: Marker[] = [];
 
     if (map) {
-      offers.forEach(({ location }) => {
-        const marker = new Marker({ lat: location.coords[0], lng: location.coords[1] });
-
-        marker.setIcon(defaultCustomMarker).addTo(map);
+      offers.forEach((offer) => {
+        const marker = new Marker({ lat: offer.location.coords[0], lng: offer.location.coords[1] });
+        marker
+          .setIcon(offer.id === id ? currentCustomIcon : defaultCustomMarker)
+          .addTo(map)
+          .on('click', () => handleSelectionClick(offer));
         markers.push(marker);
       });
     }
@@ -44,14 +60,14 @@ function MapBooking({ offers }: MapBookingProps): JSX.Element {
         });
       }
     };
-  }, [map, offers]);
+  }, [map, offers, activeOffer]);
 
   return (
     <div className='booking-map'>
       <div className='map'>
         <div className='map__container' ref={mapRef} />
       </div>
-      <p className='booking-map__address'>Вы&nbsp;выбрали: наб. реки Карповки&nbsp;5, лит&nbsp;П, м. Петроградская</p>
+      <p className='booking-map__address'>Вы&nbsp;выбрали: {location.address}</p>
     </div>
   );
 }

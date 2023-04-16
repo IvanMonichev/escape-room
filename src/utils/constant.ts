@@ -1,7 +1,7 @@
 import { TypesQuest } from '../types/types';
 
-export const URL_MARKER_DEFAULT = './img/svg/pin-default.svg';
-export const URL_MARKER_CURRENT = './img/pin-active.svg';
+export const URL_MARKER_DEFAULT = '/img/svg/pin-default.svg';
+export const URL_MARKER_ACTIVE = '/img/svg/pin-active.svg';
 
 export const VALID_EMAIL_REGEXP =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

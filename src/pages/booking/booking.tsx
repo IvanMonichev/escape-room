@@ -1,18 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import DateList from '../../components/date-list/date-list';
 import MapBooking from '../../components/map-booking/map-booking';
 import Spinner from '../../components/spinner/spinner';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { fetchOffers } from '../../store/action';
-import { getIsOffersLoading, getOffers } from '../../store/site-data/selectors';
+import { fetchOffers, fetchQuest } from '../../store/action';
+import { getIsOffersLoading, getIsQuestLoading, getOffers, getQuest } from '../../store/site-data/selectors';
+import { Offer } from '../../types/types';
 
 function Booking(): JSX.Element | null {
   const params = useParams();
   const dispatch = useAppDispatch();
+  const isQuestLoading = useAppSelector(getIsQuestLoading);
+  const quest = useAppSelector(getQuest);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
   const offers = useAppSelector(getOffers);
-  const isQuestLoading = useAppSelector(getIsOffersLoading);
+  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
+
+  useEffect(() => {
+    const { id } = params;
+    if (id) {
+      dispatch(fetchQuest(id));
+    }
+  }, [params, dispatch]);
 
   useEffect(() => {
     const { id } = params;
@@ -21,16 +33,26 @@ function Booking(): JSX.Element | null {
     }
   }, [params, dispatch]);
 
-  if (!offers) {
+  useEffect(() => {
+    if (offers) {
+      setActiveOffer(offers[0]);
+    }
+  }, [offers]);
+
+  const handleActiveOffer = (offer: Offer) => {
+    setActiveOffer(offer);
+  };
+
+  if (!offers || !quest || !activeOffer) {
     return null;
   }
 
-  // eslint-disable-next-line no-console
-  console.log(offers);
-
-  if (isQuestLoading) {
+  if (isOffersLoading || isQuestLoading) {
     return <Spinner />;
   }
+
+  const { title } = quest;
+  const { slots } = activeOffer;
 
   return (
     <main className='page-content decorated-page'>
@@ -38,13 +60,13 @@ function Booking(): JSX.Element | null {
         <picture>
           <source
             type='image/webp'
-            srcSet='img/content/maniac/maniac-bg-size-m.webp, img/content/maniac/maniac-bg-size-m@2x.webp 2x'
+            srcSet='/img/content/maniac/maniac-bg-size-m.webp, /img/content/maniac/maniac-bg-size-m@2x.webp 2x'
           />
           <img
-            src='img/content/maniac/maniac-bg-size-m.jpg'
-            srcSet='img/content/maniac/maniac-bg-size-m@2x.jpg 2x'
-            width={1366}
-            height={1959}
+            src='/img/content/maniac/maniac-bg-size-m.jpg'
+            srcSet='/img/content/maniac/maniac-bg-size-m@2x.jpg 2x'
+            width='1366'
+            height='1959'
             alt=''
           />
         </picture>
@@ -52,64 +74,16 @@ function Booking(): JSX.Element | null {
       <div className='container container--size-s'>
         <div className='page-content__title-wrapper'>
           <h1 className='subtitle subtitle--size-l page-content__subtitle'>Бронирование квеста</h1>
-          <p className='title title--size-m title--uppercase page-content__title'>Маньяк</p>
+          <p className='title title--size-m title--uppercase page-content__title'>{title}</p>
         </div>
         <div className='page-content__item'>
-          <MapBooking offers={offers} />
+          <MapBooking offers={offers} activeOffer={activeOffer} onClick={handleActiveOffer} />
         </div>
         <form className='booking-form' action='https://echo.htmlacademy.ru/' method='post'>
           <fieldset className='booking-form__section'>
             <legend className='visually-hidden'>Выбор даты и времени</legend>
-            <fieldset className='booking-form__date-section'>
-              <legend className='booking-form__date-title'>Сегодня</legend>
-              <div className='booking-form__date-inner-wrapper'>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='today9h45m' name='date' required defaultValue='today9h45m' />
-                  <span className='custom-radio__label'>9:45</span>
-                </label>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='today15h00m' name='date' defaultChecked required defaultValue='today15h00m' />
-                  <span className='custom-radio__label'>15:00</span>
-                </label>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='today17h30m' name='date' required defaultValue='today17h30m' />
-                  <span className='custom-radio__label'>17:30</span>
-                </label>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='today19h30m' name='date' required defaultValue='today19h30m' disabled />
-                  <span className='custom-radio__label'>19:30</span>
-                </label>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='today21h30m' name='date' required defaultValue='today21h30m' />
-                  <span className='custom-radio__label'>21:30</span>
-                </label>
-              </div>
-            </fieldset>
-            <fieldset className='booking-form__date-section'>
-              <legend className='booking-form__date-title'>Завтра</legend>
-              <div className='booking-form__date-inner-wrapper'>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='tomorrow11h00m' name='date' required defaultValue='tomorrow11h00m' />
-                  <span className='custom-radio__label'>11:00</span>
-                </label>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='tomorrow15h00m' name='date' required defaultValue='tomorrow15h00m' disabled />
-                  <span className='custom-radio__label'>15:00</span>
-                </label>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='tomorrow17h30m' name='date' required defaultValue='tomorrow17h30m' disabled />
-                  <span className='custom-radio__label'>17:30</span>
-                </label>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='tomorrow19h45m' name='date' required defaultValue='tomorrow19h45m' />
-                  <span className='custom-radio__label'>19:45</span>
-                </label>
-                <label className='custom-radio booking-form__date'>
-                  <input type='radio' id='tomorrow21h30m' name='date' required defaultValue='tomorrow21h30m' />
-                  <span className='custom-radio__label'>21:30</span>
-                </label>
-              </div>
-            </fieldset>
+            <DateList time={slots.today} dateIndex='Сегодня' />
+            <DateList time={slots.tomorrow} dateIndex='Завтра' />
           </fieldset>
           <fieldset className='booking-form__section'>
             <legend className='visually-hidden'>Контактная информация</legend>
