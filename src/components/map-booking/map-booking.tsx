@@ -60,7 +60,7 @@ function MapBooking({ offers, activeOffer, onClick }: MapBookingProps): JSX.Elem
         });
       }
     };
-  }, [map, offers, activeOffer]);
+  }, [map, offers, activeOffer, handleSelectionClick, id]);
 
   return (
     <div className='booking-map'>

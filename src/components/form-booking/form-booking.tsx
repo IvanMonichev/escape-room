@@ -79,7 +79,7 @@ function FormBooking({ activeOffer, peopleMinMax, slots, questId }: FormBookingP
     return () => {
       dispatch(setSubmitStatus());
     };
-  }, [submitStatus]);
+  }, [submitStatus, dispatch, navigation]);
 
   return (
     <form
