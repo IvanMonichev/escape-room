@@ -7,6 +7,9 @@ import { Booking, Offer, Slots } from '../../types/types';
 import { InvalidMessage, MAX_COUNT_NAME, MIN_COUNT_NAME, VALID_PHONE_REGEXP } from '../../utils/constant';
 import { splitDate } from '../../utils/util';
 import DateList from '../date-list/date-list';
+import { SubmitStatus } from '../../types/state';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { getBookingStatus } from '../../store/site-data/selectors';
 
 type FormBookingProps = {
   activeOffer: Offer;
@@ -24,8 +27,9 @@ function FormBooking({ activeOffer, peopleMinMax, slots, questId }: FormBookingP
   const [person, setPerson] = useState<string>('');
   const [children, setChildren] = useState<boolean>(false);
   const [minPeople, maxPeople] = peopleMinMax;
-  // eslint-disable-next-line no-console
-  console.log(time, date, name, tel, person, children);
+  const submitStatus = useAppSelector(getBookingStatus);
+  const isSubmitting = submitStatus === SubmitStatus.Pending;
+  console.log(submitStatus);
 
   useEffect(() => {
     setTime('');
@@ -83,10 +87,19 @@ function FormBooking({ activeOffer, peopleMinMax, slots, questId }: FormBookingP
       questId: questId,
     };
 
-    // eslint-disable-next-line no-console
-    console.log(data);
     dispatch(postBooking(data));
   };
+
+  useEffect(() => {
+    if (submitStatus === SubmitStatus.Fullfilled) {
+      setTime('');
+      setDate('');
+      setName('');
+      setTel('');
+      setPerson('');
+      setChildren(false);
+    }
+  }, [submitStatus]);
 
   return (
     <form
@@ -163,9 +176,11 @@ function FormBooking({ activeOffer, peopleMinMax, slots, questId }: FormBookingP
           <span className='custom-checkbox__label'>Со&nbsp;мной будут дети</span>
         </label>
       </fieldset>
-      <button className='btn btn--accent btn--cta booking-form__submit' type='submit'>
-        Забронировать
-      </button>
+      {!(submitStatus === SubmitStatus.Fullfilled) ?
+        <button className='btn btn--accent btn--cta booking-form__submit' type='submit' disabled={isSubmitting}>
+          {isSubmitting ? 'Бронируем...' : 'Забронировать'}
+        </button> :
+        <p className='title--size-s' style={{ textAlign: 'center' }}>Бронирование прошло успешно</p>}
       <label className='custom-checkbox booking-form__checkbox booking-form__checkbox--agreement'>
         <input type='checkbox' id='id-order-agreement' name='user-agreement' required onChange={handleChildrenChange} />
         <span className='custom-checkbox__icon'>
