@@ -68,7 +68,7 @@ export enum ApiRoute {
   Login = '/login',
   Logout = '/logout',
   Booking = '/booking',
-  Reservation = '/reservation'
+  Reservation = '/reservation',
 }
 
 export enum Level {
@@ -96,6 +96,11 @@ export const localizedTypes = {
   [Type.Detective]: 'Детектив',
   [Type.SciFi]: 'Sci-Fi',
 };
+
+export enum LocalizedDay {
+  Today = 'сегодня',
+  Tomorrow = 'завтра',
+}
 
 export enum HttpCode {
   NotFound = 404,

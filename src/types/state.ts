@@ -9,6 +9,7 @@ export type SiteData = {
   isOffersLoading: boolean;
   offers: Offer[] | null;
   bookingStatus: SubmitStatus;
+  removingStatus: SubmitStatus;
   isReservationLoading: boolean;
   reservation: Reservation[];
 };

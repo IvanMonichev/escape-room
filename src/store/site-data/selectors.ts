@@ -11,9 +11,12 @@ export const getIsQuestLoading = ({ [StoreSlice.SiteData]: SITE_DATA }: State): 
 export const getQuest = ({ [StoreSlice.SiteData]: SITE_DATA }: State): QuestView | null => SITE_DATA.quest;
 export const getIsOffersLoading = ({ [StoreSlice.SiteData]: SITE_DATA }: State): boolean => SITE_DATA.isOffersLoading;
 export const getOffers = ({ [StoreSlice.SiteData]: SITE_DATA }: State): Offer[] | null => SITE_DATA.offers;
-export const getBookingStatus = ({ [ StoreSlice.SiteData]: SITE_DATA }: State): SubmitStatus => SITE_DATA.bookingStatus;
+export const getBookingStatus = ({ [StoreSlice.SiteData]: SITE_DATA }: State): SubmitStatus => SITE_DATA.bookingStatus;
+export const getRemovingStatus = ({ [StoreSlice.SiteData]: SITE_DATA }: State): SubmitStatus =>
+  SITE_DATA.removingStatus;
 export const getReservation = ({ [StoreSlice.SiteData]: SITE_DATA }: State): Reservation[] => SITE_DATA.reservation;
-export const getIsReservationLoading = ({ [StoreSlice.SiteData]: SITE_DATA }: State): boolean => SITE_DATA.isReservationLoading;
+export const getIsReservationLoading = ({ [StoreSlice.SiteData]: SITE_DATA }: State): boolean =>
+  SITE_DATA.isReservationLoading;
 
 export const selectQuests = createSelector([getQuests, getType, getLevel], (quests, type, level) =>
   quests.filter((quest) => {

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { SiteData, SubmitStatus } from '../../types/state';
 import { StoreSlice } from '../../utils/constant';
-import { fetchOffers, fetchQuest, fetchQuests, fetchReservation, postBooking } from '../action';
+import { fetchOffers, fetchQuest, fetchQuests, fetchReservation, postBooking, removeReservation } from '../action';
 
 const initialState: SiteData = {
   quests: [],
@@ -12,6 +12,7 @@ const initialState: SiteData = {
   isOffersLoading: false,
   offers: null,
   bookingStatus: SubmitStatus.Still,
+  removingStatus: SubmitStatus.Still,
   isReservationLoading: false,
   reservation: [],
 };
@@ -22,7 +23,7 @@ export const siteData = createSlice({
   reducers: {
     setSubmitStatus: (state) => {
       state.bookingStatus = SubmitStatus.Still;
-    }
+    },
   },
   extraReducers(builder) {
     builder
@@ -74,6 +75,16 @@ export const siteData = createSlice({
       })
       .addCase(fetchReservation.rejected, (state) => {
         state.isReservationLoading = false;
+      })
+      .addCase(removeReservation.pending, (state) => {
+        state.bookingStatus = SubmitStatus.Pending;
+      })
+      .addCase(removeReservation.fulfilled, (state, action) => {
+        state.bookingStatus = SubmitStatus.Fullfilled;
+        state.reservation = state.reservation.filter((item) => item.id !== action.payload);
+      })
+      .addCase(removeReservation.rejected, (state) => {
+        state.bookingStatus = SubmitStatus.Rejected;
       });
   },
 });

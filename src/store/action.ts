@@ -19,7 +19,8 @@ export const Action = {
   LOGOUT_USER: 'user/logout',
   FETCH_USER_STATUS: 'user/fetch-status',
   POST_BOOKING: 'booking/post',
-  FETCH_RESERVATION: 'reservation/fetch'
+  FETCH_RESERVATION: 'reservation/fetch',
+  REMOVE_RESERVATION: 'reservation/remove',
 };
 
 export const fetchQuests = createAsyncThunk<QuestCard[], undefined, { extra: Extra }>(
@@ -87,10 +88,8 @@ export const postBooking = createAsyncThunk<void, Booking, { extra: Extra }>(
         peopleCount,
       });
     } catch (err) {
-
       return Promise.reject(err);
     }
-
   }
 );
 
@@ -101,6 +100,16 @@ export const fetchReservation = createAsyncThunk<Reservation[], undefined, { ext
     const { data } = await api.get<Reservation[]>(ApiRoute.Reservation);
 
     return data;
+  }
+);
+
+export const removeReservation = createAsyncThunk<Reservation['id'], Reservation['id'], { extra: Extra }>(
+  Action.REMOVE_RESERVATION,
+  async (id, { extra }) => {
+    const { api } = extra;
+    await api.delete(`${ApiRoute.Reservation}/${id}`);
+
+    return id;
   }
 );
 
