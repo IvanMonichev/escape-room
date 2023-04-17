@@ -59,7 +59,7 @@ function MyQuests(): JSX.Element {
             ))}
           </div>
         ) : (
-          <p className='title--size-s'>Бронирований пока нет</p>
+          <p className='title--size-s'>Список бронирований пуст</p>
         )}
       </div>
     </main>
