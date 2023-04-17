@@ -68,6 +68,7 @@ export enum ApiRoute {
   Login = '/login',
   Logout = '/logout',
   Booking = '/booking',
+  Reservation = '/reservation'
 }
 
 export enum Level {

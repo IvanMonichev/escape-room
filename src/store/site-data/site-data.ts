@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { SiteData, SubmitStatus } from '../../types/state';
 import { StoreSlice } from '../../utils/constant';
-import { fetchOffers, fetchQuest, fetchQuests, postBooking } from '../action';
+import { fetchOffers, fetchQuest, fetchQuests, fetchReservation, postBooking } from '../action';
 
 const initialState: SiteData = {
   quests: [],
@@ -12,12 +12,18 @@ const initialState: SiteData = {
   isOffersLoading: false,
   offers: null,
   bookingStatus: SubmitStatus.Still,
+  isReservationLoading: false,
+  reservation: [],
 };
 
 export const siteData = createSlice({
   name: StoreSlice.SiteData,
   initialState,
-  reducers: {},
+  reducers: {
+    setSubmitStatus: (state) => {
+      state.bookingStatus = SubmitStatus.Still;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchQuests.pending, (state) => {
@@ -58,6 +64,18 @@ export const siteData = createSlice({
       })
       .addCase(postBooking.rejected, (state) => {
         state.bookingStatus = SubmitStatus.Rejected;
+      })
+      .addCase(fetchReservation.pending, (state) => {
+        state.isReservationLoading = true;
+      })
+      .addCase(fetchReservation.fulfilled, (state, action) => {
+        state.reservation = action.payload;
+        state.isReservationLoading = false;
+      })
+      .addCase(fetchReservation.rejected, (state) => {
+        state.isReservationLoading = false;
       });
   },
 });
+
+export const { setSubmitStatus } = siteData.actions;

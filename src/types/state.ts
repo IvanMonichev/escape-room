@@ -1,5 +1,5 @@
 import store from '../store';
-import { LevelName, Offer, QuestCard, QuestView, TypeName } from './types';
+import { LevelName, Offer, QuestCard, QuestView, Reservation, TypeName } from './types';
 
 export type SiteData = {
   quests: QuestCard[];
@@ -9,6 +9,8 @@ export type SiteData = {
   isOffersLoading: boolean;
   offers: Offer[] | null;
   bookingStatus: SubmitStatus;
+  isReservationLoading: boolean;
+  reservation: Reservation[];
 };
 
 export type SiteProcess = {

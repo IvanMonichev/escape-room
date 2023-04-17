@@ -11,6 +11,7 @@ import { SubmitStatus } from '../../types/state';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getBookingStatus } from '../../store/site-data/selectors';
 import { useNavigate } from 'react-router-dom';
+import { setSubmitStatus } from '../../store/site-data/site-data';
 
 type FormBookingProps = {
   activeOffer: Offer;
@@ -101,6 +102,10 @@ function FormBooking({ activeOffer, peopleMinMax, slots, questId }: FormBookingP
       setChildren(false);
       navigation(AppRoute.MyQuests);
     }
+
+    return () => {
+      dispatch(setSubmitStatus());
+    };
   }, [submitStatus]);
 
   return (

@@ -1,4 +1,5 @@
 import { AuthorizationStatus, Level, types } from '../utils/constant';
+import { fetchReservation } from '../store/action';
 
 export type TypeName = (typeof types)[number];
 export type TypeApiName = Exclude<TypeName, 'all-quests'>;
@@ -75,3 +76,15 @@ export type Booking = {
   placeId: string;
   questId: string;
 };
+
+export type Reservation = {
+  date: string;
+  time: string;
+  contactPerson: string;
+  phone: string;
+  withChildren: boolean;
+  peopleCount: number;
+  id: string;
+  location: LocationQuest;
+  quest: QuestCard;
+}

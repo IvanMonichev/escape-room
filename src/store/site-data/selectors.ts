@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 import { State, SubmitStatus } from '../../types/state';
-import { Offer, QuestCard, QuestView } from '../../types/types';
+import { Offer, QuestCard, QuestView, Reservation } from '../../types/types';
 import { StoreSlice } from '../../utils/constant';
 import { getLevel, getType } from '../site-process/selectors';
 
@@ -12,6 +12,8 @@ export const getQuest = ({ [StoreSlice.SiteData]: SITE_DATA }: State): QuestView
 export const getIsOffersLoading = ({ [StoreSlice.SiteData]: SITE_DATA }: State): boolean => SITE_DATA.isOffersLoading;
 export const getOffers = ({ [StoreSlice.SiteData]: SITE_DATA }: State): Offer[] | null => SITE_DATA.offers;
 export const getBookingStatus = ({ [ StoreSlice.SiteData]: SITE_DATA }: State): SubmitStatus => SITE_DATA.bookingStatus;
+export const getReservation = ({ [StoreSlice.SiteData]: SITE_DATA }: State): Reservation[] => SITE_DATA.reservation;
+export const getIsReservationLoading = ({ [StoreSlice.SiteData]: SITE_DATA }: State): boolean => SITE_DATA.isReservationLoading;
 
 export const selectQuests = createSelector([getQuests, getType, getLevel], (quests, type, level) =>
   quests.filter((quest) => {
