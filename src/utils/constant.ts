@@ -72,9 +72,6 @@ export enum ApiRoute {
 
 export enum Level {
   Any = 'Любой',
-  Easy = 'Лёгкий',
-  Medium = 'Средний',
-  Hard = 'Сложный',
 }
 
 export const localizedLevels = {

@@ -4,12 +4,13 @@ import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { postBooking } from '../../store/action';
 import { Booking, Offer, Slots } from '../../types/types';
-import { InvalidMessage, MAX_COUNT_NAME, MIN_COUNT_NAME, VALID_PHONE_REGEXP } from '../../utils/constant';
+import { AppRoute, InvalidMessage, MAX_COUNT_NAME, MIN_COUNT_NAME, VALID_PHONE_REGEXP } from '../../utils/constant';
 import { splitDate } from '../../utils/util';
 import DateList from '../date-list/date-list';
 import { SubmitStatus } from '../../types/state';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getBookingStatus } from '../../store/site-data/selectors';
+import { useNavigate } from 'react-router-dom';
 
 type FormBookingProps = {
   activeOffer: Offer;
@@ -20,6 +21,7 @@ type FormBookingProps = {
 
 function FormBooking({ activeOffer, peopleMinMax, slots, questId }: FormBookingProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigation = useNavigate();
   const [time, setTime] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [name, setName] = useState<string>('');
@@ -29,7 +31,6 @@ function FormBooking({ activeOffer, peopleMinMax, slots, questId }: FormBookingP
   const [minPeople, maxPeople] = peopleMinMax;
   const submitStatus = useAppSelector(getBookingStatus);
   const isSubmitting = submitStatus === SubmitStatus.Pending;
-  console.log(submitStatus);
 
   useEffect(() => {
     setTime('');
@@ -98,6 +99,7 @@ function FormBooking({ activeOffer, peopleMinMax, slots, questId }: FormBookingP
       setTel('');
       setPerson('');
       setChildren(false);
+      navigation(AppRoute.MyQuests);
     }
   }, [submitStatus]);
 

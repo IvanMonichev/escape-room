@@ -74,15 +74,22 @@ export const postBooking = createAsyncThunk<void, Booking, { extra: Extra }>(
   Action.POST_BOOKING,
   async ({ questId, date, time, contactPerson, phone, withChildren, placeId, peopleCount }, { extra }) => {
     const { api } = extra;
-    await api.post<undefined>(`${ApiRoute.Quests}/${questId}${ApiRoute.Booking}`, {
-      date,
-      time,
-      contactPerson,
-      phone,
-      withChildren,
-      placeId,
-      peopleCount,
-    });
+
+    try {
+      await api.post<undefined>(`${ApiRoute.Quests}/${questId}${ApiRoute.Booking}`, {
+        date,
+        time,
+        contactPerson,
+        phone,
+        withChildren,
+        placeId,
+        peopleCount,
+      });
+    } catch (err) {
+
+      return Promise.reject(err);
+    }
+
   }
 );
 

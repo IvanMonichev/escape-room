@@ -1,6 +1,7 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
 
 import Token from './Token';
+import { toast } from 'react-toastify';
 
 const BACKEND_URL = 'https://grading.design.pages.academy/v1/escape-room';
 const REQUEST_TIMEOUT = 5000;
@@ -21,6 +22,14 @@ export const createApi = (): AxiosInstance => {
 
     return config;
   });
+
+  api.interceptors.response.use(
+    (response) => response,
+    (err: AxiosError) => {
+      toast.dismiss();
+      toast.warn(err.message);
+    }
+  );
 
   return api;
 };
