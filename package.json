@@ -2,6 +2,8 @@
   "name": "project",
   "version": "0.1.0",
   "private": true,
+  "author": "Ivan Monichev",
+  "homepage": "https://github.com/IvanMonichev/escape-room",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "axios": "^0.27.2",
@@ -21,7 +23,8 @@
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .tsx --ext .ts src",
-    "deploy": "npm run build && gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",

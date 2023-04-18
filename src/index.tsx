@@ -7,14 +7,22 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import App from './components/app/app';
 import store from './store';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+const router = createHashRouter([
+  {
+    path: '/*',
+    element: <App />
+  }
+]);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer />
-      <App />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );
