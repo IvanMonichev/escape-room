@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "Ivan Monichev",
-  "homepage": "https://github.com/IvanMonichev/escape-room",
+  "homepage": "https://ivanmonichev.github.io/escape-room/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "axios": "^0.27.2",

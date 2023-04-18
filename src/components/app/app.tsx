@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { unstable_HistoryRouter as HistoryRouter, Route, Routes } from 'react-router-dom';
 
 import Booking from '../../pages/booking/booking';
 import Contacts from '../../pages/contacts/contacts';
@@ -9,43 +9,46 @@ import MyQuests from '../../pages/my-quests/my-quests';
 import NotFound from '../../pages/not-found/not-found';
 import Quest from '../../pages/quest/quest';
 import { AppRoute, AuthorizationStatus } from '../../utils/constant';
+import history from '../../utils/history';
 import Layout from '../layout/layout';
 import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route index element={<Main />} />
-        <Route
-          path={`${AppRoute.Quest}/:id${AppRoute.Booking}`}
-          element={
-            <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectTo={AppRoute.Login}>
-              <Booking />
-            </PrivateRoute>
-          }
-        />
-        <Route path={AppRoute.Contacts} element={<Contacts />} />
-        <Route
-          path={AppRoute.Login}
-          element={
-            <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectTo={AppRoute.Root}>
-              <Login />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.MyQuests}
-          element={
-            <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectTo={AppRoute.Login}>
-              <MyQuests />
-            </PrivateRoute>
-          }
-        />
-        <Route path={`${AppRoute.Quest}/:id`} element={<Quest />} />
-        <Route path='*' element={<NotFound />} />
-      </Route>
-    </Routes>
+    <HistoryRouter history={history}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route
+            path={`${AppRoute.Quest}/:id${AppRoute.Booking}`}
+            element={
+              <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectTo={AppRoute.Login}>
+                <Booking />
+              </PrivateRoute>
+            }
+          />
+          <Route path={AppRoute.Contacts} element={<Contacts />} />
+          <Route
+            path={AppRoute.Login}
+            element={
+              <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectTo={AppRoute.Root}>
+                <Login />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.MyQuests}
+            element={
+              <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectTo={AppRoute.Login}>
+                <MyQuests />
+              </PrivateRoute>
+            }
+          />
+          <Route path={`${AppRoute.Quest}/:id`} element={<Quest />} />
+          <Route path='*' element={<NotFound />} />
+        </Route>
+      </Routes>
+    </HistoryRouter>
   );
 }
 
